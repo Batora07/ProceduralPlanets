@@ -7,6 +7,7 @@ public class Planet : MonoBehaviour {
     /* PUBLIC FIELDS */
     [Range(2,256)]
     public int resolution = 10;
+    public bool autoUpdate;
     public ShapeSettings shapeSettings;
     public ColourSettings colourSettings;
     [HideInInspector]
@@ -39,8 +40,11 @@ public class Planet : MonoBehaviour {
     /// </summary>
     public void OnColourSettingsUpdated()
     {
-        Initialize();
-        GenerateColours();
+        if (autoUpdate)
+        {
+            Initialize();
+            GenerateColours();
+        }
     }
 
     /// <summary>
@@ -48,14 +52,11 @@ public class Planet : MonoBehaviour {
     /// </summary>
     public void OnShapeSettingsUpdated()
     {
-        Initialize();
-        GenerateMesh();
-    }
-
-    private void OnValidate()
-    {
-        Initialize();
-        GeneratePlanet();
+        if (autoUpdate)
+        {
+            Initialize();
+            GenerateMesh();
+        }
     }
 
     /// <summary>

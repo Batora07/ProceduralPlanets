@@ -571,8 +571,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resolution: 10
+  autoUpdate: 0
   shapeSettings: {fileID: 11400000, guid: fbc199e94def2c64880d5a89ab773d0f, type: 2}
   colourSettings: {fileID: 11400000, guid: 3b858bc9ce3c7264eaafffa46f315824, type: 2}
+  shapeSettingsFoldOut: 0
+  colourSettingsFoldOut: 0
   meshFilters:
   - {fileID: 1781562840}
   - {fileID: 1936253163}
@@ -671,7 +674,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.6039216, g: 0.15779491, b: 0.14509803, a: 0}
+    - _Color: {r: 0.121568635, g: 0.7372549, b: 0.1458194, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!43 &487832911
 Mesh:
@@ -891,7 +894,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.6039216, g: 0.15779491, b: 0.14509803, a: 0}
+    - _Color: {r: 0.121568635, g: 0.7372549, b: 0.1458194, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &857163468
 GameObject:
@@ -1037,7 +1040,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.6039216, g: 0.15779491, b: 0.14509803, a: 0}
+    - _Color: {r: 0.121568635, g: 0.7372549, b: 0.1458194, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &1184464308
 GameObject:
@@ -1329,7 +1332,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.6039216, g: 0.15779491, b: 0.14509803, a: 0}
+    - _Color: {r: 0.121568635, g: 0.7372549, b: 0.1458194, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!43 &1685674595
 Mesh:
@@ -1983,7 +1986,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.6039216, g: 0.15779491, b: 0.14509803, a: 0}
+    - _Color: {r: 0.121568635, g: 0.7372549, b: 0.1458194, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!21 &2059467117
 Material:
@@ -2057,5 +2060,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.6039216, g: 0.15779491, b: 0.14509803, a: 0}
+    - _Color: {r: 0.121568635, g: 0.7372549, b: 0.1458194, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
