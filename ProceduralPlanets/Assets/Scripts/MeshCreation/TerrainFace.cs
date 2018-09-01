@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public class TerrainFace {
 
+    private ShapeGenerator shapeGenerator;
     private Mesh mesh;
     private int resolution;
     private Vector3 localUp;
@@ -14,8 +15,9 @@ public class TerrainFace {
     private Vector3 axisA;
     private Vector3 axisB;
 
-    public TerrainFace(Mesh _mesh, int _resolution, Vector3 _localUp)
+    public TerrainFace(ShapeGenerator _shapeGenerator,Mesh _mesh, int _resolution, Vector3 _localUp)
     {
+        this.shapeGenerator = _shapeGenerator;
         this.mesh = _mesh;
         this.resolution = _resolution;
         this.localUp = _localUp;
@@ -41,7 +43,7 @@ public class TerrainFace {
                 Vector3 pointOnUnitCube = localUp + (percent.x - .5f) * 2 * axisA + (percent.y - .5f) * 2 * axisB;
                 // transform the current planar cube as a spherical/round plane
                 Vector3 pointOnUnitSphere = pointOnUnitCube.normalized;
-                vertices[i] = pointOnUnitSphere;
+                vertices[i] = shapeGenerator.CalculatePointOnPlanet(pointOnUnitSphere);
 
                 // make a square for this mesh
                 if (x != resolution - 1 && y != resolution - 1)
