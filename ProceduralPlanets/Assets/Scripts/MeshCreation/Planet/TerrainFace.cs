@@ -5,7 +5,8 @@ using UnityEngine;
 /// <summary>
 /// One of the faces of a planet, contains mesh construction of this plane / face
 /// </summary>
-public class TerrainFace {
+public class TerrainFace
+{
 
     private ShapeGenerator shapeGenerator;
     private Mesh mesh;
@@ -15,7 +16,7 @@ public class TerrainFace {
     private Vector3 axisA;
     private Vector3 axisB;
 
-    public TerrainFace(ShapeGenerator _shapeGenerator,Mesh _mesh, int _resolution, Vector3 _localUp)
+    public TerrainFace(ShapeGenerator _shapeGenerator, Mesh _mesh, int _resolution, Vector3 _localUp)
     {
         this.shapeGenerator = _shapeGenerator;
         this.mesh = _mesh;
@@ -33,8 +34,9 @@ public class TerrainFace {
         int[] triangles = new int[(resolution - 1) * (resolution - 1) * 6];
         int i = 0;
         int triIndex = 0;
+        Vector2[] UV = (mesh.uv.Length == vertices.Length) ? mesh.uv : new Vector2[vertices.Length]; 
 
-        for(int y = 0; y < resolution; y++)
+        for (int y = 0; y < resolution; y++)
         {
             for (int x = 0; x < resolution; x++)
             {
@@ -43,7 +45,10 @@ public class TerrainFace {
                 Vector3 pointOnUnitCube = localUp + (percent.x - .5f) * 2 * axisA + (percent.y - .5f) * 2 * axisB;
                 // transform the current planar cube as a spherical/round plane
                 Vector3 pointOnUnitSphere = pointOnUnitCube.normalized;
-                vertices[i] = shapeGenerator.CalculatePointOnPlanet(pointOnUnitSphere);
+                float unscaledElevation = shapeGenerator.CalculateUnscaledElevation(pointOnUnitSphere);
+                vertices[i] = pointOnUnitSphere * shapeGenerator.GetScaledElevation(unscaledElevation);
+                // using the y axis for the biomes
+                UV[i].y = unscaledElevation;
 
                 // make a square for this mesh
                 if (x != resolution - 1 && y != resolution - 1)
@@ -56,9 +61,9 @@ public class TerrainFace {
                     triangles[triIndex + 3] = i;
                     triangles[triIndex + 4] = i + 1;
                     triangles[triIndex + 5] = i + resolution + 1;
-                     // we added 6 vertices, update the index count
+                    // we added 6 vertices, update the index count
                     triIndex += 6;
-                } 
+                }
                 ++i;
             }
         }
@@ -69,5 +74,27 @@ public class TerrainFace {
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
+        mesh.uv = UV;
+    }
+
+    public void UpdateUVs(ColourGenerator colourGenerator)
+    {
+        Vector2[] uv = mesh.uv;
+
+        for (int y = 0; y < resolution; y++)
+        {
+            for (int x = 0; x < resolution; x++)
+            {
+                int i = x + y * resolution;
+                // how close to complete each of these loops is
+                Vector2 percent = new Vector2(x, y) / (resolution - 1);
+                Vector3 pointOnUnitCube = localUp + (percent.x - .5f) * 2 * axisA + (percent.y - .5f) * 2 * axisB;
+                // transform the current planar cube as a spherical/round plane
+                Vector3 pointOnUnitSphere = pointOnUnitCube.normalized;
+
+                uv[i].x = colourGenerator.BiomePercentFromPoint(pointOnUnitSphere);
+            }
+        }
+        mesh.uv = uv;
     }
 }

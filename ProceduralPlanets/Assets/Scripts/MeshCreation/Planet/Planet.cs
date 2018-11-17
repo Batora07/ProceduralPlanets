@@ -124,5 +124,12 @@ public class Planet : MonoBehaviour {
     private void GenerateColours()
     {
         colourGenerator.UpdateColors();
+        for (int i = 0; i < MAX_FACES; ++i)
+        {
+            if (meshFilters[i].gameObject.activeSelf)
+            {
+                terrainFaces[i].UpdateUVs(colourGenerator);
+            }
+        }
     }
 }
