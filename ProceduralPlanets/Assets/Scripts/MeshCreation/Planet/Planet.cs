@@ -7,7 +7,12 @@ public class Planet : MonoBehaviour {
     /* PUBLIC FIELDS */
     [Range(2,256)]
     public int resolution = 10;
-    public bool autoUpdate;
+    public bool autoUpdate = true;
+
+    public enum FaceRenderMask { All, Top, Bottom, Left, Right, Front, Back };
+    public FaceRenderMask faceRenderMask;
+
+
     public ShapeSettings shapeSettings;
     public ColourSettings colourSettings;
     [HideInInspector]
@@ -92,8 +97,8 @@ public class Planet : MonoBehaviour {
             meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colourSettings.planetMaterial;
 
             terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].sharedMesh, resolution, directions[i]);
-            //bool renderFace = faceRenderMask == FaceRenderMask.All || (int)faceRenderMask - 1 == i;
-            //meshFilters[i].gameObject.SetActive(renderFace);
+            bool renderFace = faceRenderMask == FaceRenderMask.All || (int)faceRenderMask - 1 == i;
+            meshFilters[i].gameObject.SetActive(renderFace);
         }
     }
 

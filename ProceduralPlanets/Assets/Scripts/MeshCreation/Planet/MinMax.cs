@@ -9,8 +9,8 @@ public class MinMax {
 
     public MinMax()
     {
-        Min = float.MinValue;
-        Max = float.MaxValue;
+        Min = float.MaxValue;
+        Max = float.MinValue;
     }
 
     public void AddValue(float v)
