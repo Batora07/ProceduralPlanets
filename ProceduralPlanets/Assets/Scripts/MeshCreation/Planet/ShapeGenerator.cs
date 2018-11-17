@@ -45,6 +45,6 @@ public class ShapeGenerator {
         // keeping track of the minimum and maximum elevation for all the vertices in the planet
         elevation = settings.planetRadius * (1 + elevation);
         elevationMinMax.AddValue(elevation);
-        return _pointOnUnitSphere * settings.planetRadius * (1 + elevation);
+        return _pointOnUnitSphere * elevation;
     }
 }

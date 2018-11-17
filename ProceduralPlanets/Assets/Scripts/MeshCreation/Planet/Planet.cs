@@ -12,9 +12,9 @@ public class Planet : MonoBehaviour {
     public enum FaceRenderMask { All, Top, Bottom, Left, Right, Front, Back };
     public FaceRenderMask faceRenderMask;
 
-
     public ShapeSettings shapeSettings;
     public ColourSettings colourSettings;
+
     [HideInInspector]
     public bool shapeSettingsFoldOut;
     [HideInInspector]
